@@ -24,7 +24,7 @@ namespace Assets.Scripts.Inventory
 		}
 	
 		void OnMouseItemChanged() {
-			if (mouseItem.GetItem().HasValue) {
+			if (mouseItem.GetItem() != null) {
 				gameObject.SetActive(true);
 			} else {
 				gameObject.SetActive(false);
@@ -34,8 +34,8 @@ namespace Assets.Scripts.Inventory
 		void IPointerClickHandler.OnPointerClick(PointerEventData eventData){
 			Debug.Log("CLICKED!");
 			var mouseCarried = mouseItem.GetItem();
-			if (mouseCarried.HasValue) {
-				ThrowMousedItem(mouseCarried.Value.item.GetValue().GetGameObject());
+			if (mouseCarried != null) {
+				ThrowMousedItem(mouseCarried.GetGameObject());
 				mouseItem.SetItem(null);
 			}
 		}

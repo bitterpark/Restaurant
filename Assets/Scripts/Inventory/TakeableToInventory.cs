@@ -11,7 +11,7 @@ namespace Assets.Scripts.Inventory
 		MouseDraggedInventoryItem mouseItem;
 
 		[SerializeField]
-		ItemData myData;
+		IInventoryItemWrapper myData;
 
 		private void Awake() {
 			enabled = false;
@@ -27,9 +27,11 @@ namespace Assets.Scripts.Inventory
 		}
 
 		private void OnMouseDown() {
-			if (enabled && !mouseItem.GetItem().HasValue) {
-				myData.item.GetValue().GetGameObject().SetActive(false);
-				mouseItem.SetItem(myData);
+			var mouseItemVal = mouseItem.GetItem();
+			if (enabled && mouseItemVal == null) {
+				var myValue = myData.GetValue();
+				myValue.GetGameObject().SetActive(false);
+				mouseItem.SetItem(myValue);
 			}
 		}
 	}

@@ -31,8 +31,8 @@ namespace Assets.Scripts.UI
 
 		private void Update() {
 			var currentItem = mouseItem.GetItem();
-			if (currentItem.HasValue) {
-				OnSet(currentItem.Value.item.GetValue());
+			if (currentItem != null) {
+				OnSet(currentItem);
 			} else {
 				OnSet(null);
 			}

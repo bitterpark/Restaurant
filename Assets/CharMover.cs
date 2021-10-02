@@ -8,7 +8,6 @@ public class CharMover : MonoBehaviour
     float playerSpeed;
     [SerializeField]
     float gravity = 1f;
-
     CharacterController controller;
     
     // Start is called before the first frame update

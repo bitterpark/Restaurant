@@ -20,6 +20,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 926052978023501693, guid: 05b2c4822542e5f45b9016270f82ce4a,
+        type: 3}
+      propertyPath: myData.uObj
+      value: 
+      objectReference: {fileID: 2433229371754786940}
     - target: {fileID: 3479619764215940289, guid: 05b2c4822542e5f45b9016270f82ce4a,
         type: 3}
       propertyPath: cookedDish
@@ -126,3 +131,15 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1265096453676119229}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2433229371754786940 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3479619764215940289, guid: 05b2c4822542e5f45b9016270f82ce4a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1265096453676119229}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2847252308882218765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47e43f34fb8542f4286c919db4fd25fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

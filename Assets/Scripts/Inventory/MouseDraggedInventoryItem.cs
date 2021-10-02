@@ -10,27 +10,23 @@ namespace Assets.Scripts.Inventory
 	public class MouseDraggedInventoryItem : ScriptableObject {
 		
 		public event System.Action EItemChanged;
-		
-		ItemData? currentItem;
 
-		public void SetItem(ItemData? item) {
-			currentItem = item;
+		IInventoryItemWrapper currentItem;
+
+		public void SetItem(IInventoryItem item) {
+			currentItem.SetValue(item);
 			EItemChanged?.Invoke();
 		}
 
-		public ItemData? GetItem() {
-			return currentItem;
+		public IInventoryItem GetItem() {
+			return currentItem.GetValue();
 		}
 
-		[System.Serializable]
-		public struct ItemData {	
-			public IInventoryItemWrapper item;
-		}
 
-		[System.Serializable]
-		public class IInventoryItemWrapper : Wrapper<IInventoryItem> { }
+		
 
 	}
 
-	
+	[System.Serializable]
+	public class IInventoryItemWrapper : Wrapper<IInventoryItem> { }
 }

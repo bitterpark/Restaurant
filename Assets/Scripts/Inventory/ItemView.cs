@@ -13,7 +13,7 @@ namespace Assets.Scripts.Inventory
 		[SerializeField]
 		MouseDraggedInventoryItem mouseItem;
 		[SerializeField]
-		MouseDraggedInventoryItem.ItemData startingData;
+		IInventoryItemWrapper startingData;
 
 		[SerializeField]
 		Image iconComp;
@@ -23,20 +23,19 @@ namespace Assets.Scripts.Inventory
 		[SerializeField]
 		public Wrapper<IInventoryItem> item;
 
-		MouseDraggedInventoryItem.ItemData? myItem;
+		IInventoryItem myItem;
 
 		void OnEnable() {
-			SetItem(startingData);
+			SetItem(startingData.GetValue());
 		}
 
-		public void SetItem(MouseDraggedInventoryItem.ItemData? newItem) {
+		public void SetItem(IInventoryItem newItem) {
 			myItem = newItem;
 			Sprite setSprite = null;
 			string setText = null;
-			if (myItem.HasValue) {
-				var itemVal = myItem.Value.item.GetValue();
-				setSprite = itemVal.GetSprite();
-				setText = itemVal.GetName();
+			if (myItem != null) {
+				setSprite = myItem.GetSprite();
+				setText = myItem.GetName();
 			}
 			iconComp.sprite = setSprite;
 			textcomp.text = setText;

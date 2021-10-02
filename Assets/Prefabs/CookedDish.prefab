@@ -143,10 +143,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouseItem: {fileID: 11400000, guid: 1f54969515739a14e88331c557adc8e5, type: 2}
   myData:
-    item:
-      plainObj:
-        id: 0
-      uObj: {fileID: 3479619764215940289}
+    plainObj:
+      id: 0
+    uObj: {fileID: 3479619764215940289}
   references:
     version: 1
     00000000:
