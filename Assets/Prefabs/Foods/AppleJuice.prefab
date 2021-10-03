@@ -71,7 +71,13 @@ PrefabInstance:
     - target: {fileID: 3895048967576972208, guid: 05b2c4822542e5f45b9016270f82ce4a,
         type: 3}
       propertyPath: m_Name
-      value: CookedDish
+      value: AppleJuice
       objectReference: {fileID: 0}
+    - target: {fileID: 8329291187662180228, guid: 05b2c4822542e5f45b9016270f82ce4a,
+        type: 3}
+      propertyPath: dish
+      value: 
+      objectReference: {fileID: 11400000, guid: d36fd98972df6ed439c04e79d74f58fe,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05b2c4822542e5f45b9016270f82ce4a, type: 3}

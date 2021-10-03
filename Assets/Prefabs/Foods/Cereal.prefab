@@ -121,6 +121,12 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: -0.00004386902
       objectReference: {fileID: 0}
+    - target: {fileID: 8329291187662180228, guid: 05b2c4822542e5f45b9016270f82ce4a,
+        type: 3}
+      propertyPath: dish
+      value: 
+      objectReference: {fileID: 11400000, guid: 2caa5e396a6814c4b8a87ce8cff4ab09,
+        type: 2}
     m_RemovedComponents:
     - {fileID: 0}
     - {fileID: 7180417619931721480, guid: 05b2c4822542e5f45b9016270f82ce4a, type: 3}

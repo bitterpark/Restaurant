@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace Assets.Scripts.Spawners
 {
-	public class ObjectDispenser : MonoBehaviour {
+	public class ObjectDispenser : MonoBehaviour, ISpawner
+	{
 		[SerializeField]
 		MeshFilter dispensedObjectPrefab;
 
@@ -13,44 +14,35 @@ namespace Assets.Scripts.Spawners
 		[SerializeField]
 		LayerMask collisionsLayerMask;
 
-		GameObject currentObject;
-
 		Collider[] overlapCheckBuffer;
 
-		private void Awake() {
-			CreateNewObj();
-		}
+		[SerializeField]
+		bool spawnOnce;
 
-		void CreateNewObj() {
-			var newObj = Instantiate(dispensedObjectPrefab, transform.position, Quaternion.identity);
-			currentObject = newObj.gameObject;
-			StartCoroutine(WaitUnitObjectTaken());
-		}
-		IEnumerator WaitUnitObjectTaken() {
-			while (currentObject != null) {
-				var overlapping = OverlappingCollidersExist();
-				if (overlapping) {
-					yield return new WaitForFixedUpdate();
-				} else {
-					OnObjectTaken();
-					yield break;
-				}
+		public void SpawnObj(MeshFilter prefab, bool spawnOnce) {
+			dispensedObjectPrefab = prefab;
+			this.spawnOnce = spawnOnce;
+			if (!gameObject.activeInHierarchy) {
+				gameObject.SetActive(true);
+			} else {
+				StartCoroutine(StartSpawningNewObject());
 			}
 		}
 
-		void OnObjectTaken() {
-			currentObject = null;
+		private void OnEnable() {
 			StartCoroutine(StartSpawningNewObject());
 		}
+	
 		IEnumerator StartSpawningNewObject() {
-			while (currentObject == null) {
-				var overlapping = OverlappingCollidersExist();
-				if (overlapping) {
-					yield return new WaitForFixedUpdate();
-				} else {
-					CreateNewObj();
-					yield break;
-				}
+			while (OverlappingCollidersExist()) {
+				yield return new WaitForFixedUpdate();
+			}
+			CreateNewObj();
+		}
+		void CreateNewObj() {
+			Instantiate(dispensedObjectPrefab, transform.position, Quaternion.identity);
+			if (!spawnOnce) {
+				StartCoroutine(StartSpawningNewObject());
 			}
 		}
 
@@ -69,7 +61,6 @@ namespace Assets.Scripts.Spawners
 			return collidersCount > 0;
 		}
 
-		//Draw the Box Overlap as a gizmo to show where it currently is testing. Click the Gizmos button to see this
 		void OnDrawGizmos() {
 			Gizmos.color = Color.blue;
 			if (OverlappingCollidersExist()) {
@@ -90,5 +81,11 @@ namespace Assets.Scripts.Spawners
 			return dispensedObjectPrefab.sharedMesh.bounds.size;
 		}
 
+		
+	}
+
+	public interface ISpawner
+	{
+		void SpawnObj(MeshFilter prefab, bool spawnOnce);
 	}
 }
