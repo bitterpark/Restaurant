@@ -21,10 +21,6 @@ namespace Assets.Scripts.Inventory
 		public IInventoryItem GetItem() {
 			return currentItem.GetValue();
 		}
-
-
-		
-
 	}
 
 	[System.Serializable]

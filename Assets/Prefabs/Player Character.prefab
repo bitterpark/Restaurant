@@ -48,6 +48,7 @@ MonoBehaviour:
     plainObj:
       id: 0
     uObj: {fileID: 11400000, guid: 4466dfb35d7409f449b825d284a35073, type: 2}
+  handsState: {fileID: 11400000, guid: 2498639db210ab1499060ad8bcaf7b83, type: 2}
   references:
     version: 1
     00000000:
