@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace Assets.Scripts.Inventory
 {
 	[RequireComponent(typeof(Image))]
-	public class ThrowItemArea : MonoBehaviour, IPointerClickHandler
+	public class ThrowItemArea : MonoBehaviour, IPointerDownHandler
 	{
 		[SerializeField]
 		MouseDraggedInventoryItem mouseItem;
@@ -24,23 +24,32 @@ namespace Assets.Scripts.Inventory
 		}
 	
 		void OnMouseItemChanged() {
+			StartCoroutine(ChangeStateAfterOneFrame());
+		}
+
+		IEnumerator ChangeStateAfterOneFrame() {
+			yield return new WaitForEndOfFrame();
+			UpdateActiveState();
+		}
+		
+		void UpdateActiveState() {
 			if (mouseItem.GetItem() != null) {
-				gameObject.SetActive(true);
+				enabled = true;
 			} else {
-				gameObject.SetActive(false);
+				enabled = false;
 			}
 		}
 
-		void IPointerClickHandler.OnPointerClick(PointerEventData eventData){
-			Debug.Log("CLICKED!");
+		void IPointerDownHandler.OnPointerDown(PointerEventData eventData){
+			Debug.Log("Throw item area clicked");
 			var mouseCarried = mouseItem.GetItem();
-			if (mouseCarried != null) {
-				ThrowMousedItem(mouseCarried.GetGameObject());
+			if (enabled && mouseCarried != null) {
+				ThrowItem(mouseCarried.GetGameObject());
 				mouseItem.SetItem(null);
 			}
 		}
 
-		void ThrowMousedItem(GameObject itemView) {
+		void ThrowItem(GameObject itemView) {
 			itemView.gameObject.SetActive(true);
 			var rb = itemView.GetComponent<Rigidbody>();
 			grabber.ThrowObj(rb);

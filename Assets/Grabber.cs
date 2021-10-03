@@ -26,15 +26,18 @@ public class Grabber : MonoBehaviour
 	}
 
     void FixedUpdate() {
-        if (carried) {
-            var directionVector = Vector3.Lerp(transform.position, carried.transform.position, 0.9f);
-            //var vel = directionVector - carried.transform.position;
-            carried.MovePosition(directionVector);
-            carried.rotation = Quaternion.identity;
-        }
-    }
+		UpdateCarriedObj();
+	}
 
-    void SetCarried(Rigidbody newCarried) {
+	private void UpdateCarriedObj() {
+		if (carried) {
+			var directionVector = Vector3.Lerp(carried.transform.position, transform.position, 0.1f);
+			carried.MovePosition(directionVector);
+			carried.rotation = Quaternion.identity;
+		}
+	}
+
+	void SetCarried(Rigidbody newCarried) {
         if (carried != null) {
             carried.useGravity = true;
             carried.collisionDetectionMode = CollisionDetectionMode.Discrete;

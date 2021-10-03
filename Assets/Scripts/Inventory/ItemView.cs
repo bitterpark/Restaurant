@@ -8,7 +8,7 @@ using Assets.Scripts.Utility;
 namespace Assets.Scripts.Inventory
 {
 
-	public class ItemView : MonoBehaviour, IPointerUpHandler, IPointerClickHandler
+	public class ItemView : MonoBehaviour, IPointerDownHandler
 	{
 		[SerializeField]
 		MouseDraggedInventoryItem mouseItem;
@@ -41,20 +41,10 @@ namespace Assets.Scripts.Inventory
 			textcomp.text = setText;
 		}
 
-		void IPointerClickHandler.OnPointerClick(PointerEventData eventData) {
-			if (mouseItem.GetItem() == null) {
-				mouseItem.SetItem(myItem);
-				SetItem(null);
-			}
-		}
-
-		void IPointerUpHandler.OnPointerUp(PointerEventData eventData) {
-			var droppedItem = mouseItem.GetItem();
-			if (droppedItem != null) {
-				var myOriginalItem = myItem;
-				SetItem(droppedItem);
-				mouseItem.SetItem(myOriginalItem);
-			}
+		void IPointerDownHandler.OnPointerDown(PointerEventData eventData) {
+			var currentMouseItem = mouseItem.GetItem();
+			mouseItem.SetItem(myItem);
+			SetItem(currentMouseItem);
 		}
 	}
 

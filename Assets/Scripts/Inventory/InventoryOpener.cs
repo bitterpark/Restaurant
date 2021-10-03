@@ -6,7 +6,9 @@ namespace Assets.Scripts.Inventory
 	public class InventoryOpener : MonoBehaviour
 	{
 		public static event System.Action<bool> EInventoryToggled;
-		
+
+		public static bool InventoryOpen = false;
+
 		[SerializeField]
 		GameObject inventory;
 
@@ -14,6 +16,7 @@ namespace Assets.Scripts.Inventory
 			if (Input.GetKeyDown(KeyCode.Tab)) {
 				bool setActive = !inventory.activeSelf;
 				inventory.SetActive(setActive);
+				InventoryOpen = setActive;
 				EInventoryToggled?.Invoke(setActive);
 			}
 		}

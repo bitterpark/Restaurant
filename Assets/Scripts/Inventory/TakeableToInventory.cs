@@ -14,8 +14,8 @@ namespace Assets.Scripts.Inventory
 		IInventoryItemWrapper myData;
 
 		private void Awake() {
-			enabled = false;
 			InventoryOpener.EInventoryToggled += OnInventoryToggled;
+			OnInventoryToggled(InventoryOpener.InventoryOpen);
 		}
 
 		private void OnDestroy() {
@@ -27,6 +27,7 @@ namespace Assets.Scripts.Inventory
 		}
 
 		private void OnMouseDown() {
+			Debug.Log("TakeableToInv clicked");
 			var mouseItemVal = mouseItem.GetItem();
 			if (enabled && mouseItemVal == null) {
 				var myValue = myData.GetValue();
