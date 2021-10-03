@@ -13,6 +13,12 @@ namespace Assets.Scripts.Controls
 
 		[SerializeField]
 		IInputSourceWrapper inputSource;
+
+		[SerializeField]
+		float maxPickupDist = 1f;
+
+		const float CARRIED_DRAG_VALUE = 10f;
+
 		[System.Serializable]
 		class IInputSourceWrapper : Wrapper<IInputSource>
 		{
@@ -32,7 +38,7 @@ namespace Assets.Scripts.Controls
 
 
 		void OnPickUpableClicked(Rigidbody pickUpable) {
-			if (!handsState.CarryingItem) {
+			if (!handsState.CarryingItem && (transform.position - pickUpable.position).magnitude < maxPickupDist) {
 				SetCarried(pickUpable);
 			}
 		}
@@ -47,6 +53,8 @@ namespace Assets.Scripts.Controls
 				carried.useGravity = false;
 				carried.collisionDetectionMode = CollisionDetectionMode.Continuous;
 				carried.interpolation = RigidbodyInterpolation.Interpolate;
+				carried.drag = CARRIED_DRAG_VALUE;
+				carried.angularDrag = CARRIED_DRAG_VALUE;
 				//Waiting for a frame is required to ensure the click that set the carried obj to mouse doesn't unset it in the same frame
 				waitingOneFrame = true;
 			}
@@ -95,6 +103,8 @@ namespace Assets.Scripts.Controls
 			if (carried != null) {
 				carried.useGravity = true;
 				carried.isKinematic = false;
+				carried.drag = 0;
+				carried.angularDrag = 0;
 				carried.collisionDetectionMode = CollisionDetectionMode.Discrete;
 				carried.interpolation = RigidbodyInterpolation.None;
 				handsState.SetItem(null);
