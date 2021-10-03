@@ -33,29 +33,33 @@ public class Grabber : MonoBehaviour
             SetCarried(pickUpable);
         }
 	}
-
-    void FixedUpdate() {
-		UpdateCarriedObj();
-	}
-
-	private void UpdateCarriedObj() {
-		if (carried) {
-			var directionVector = Vector3.Lerp(carried.transform.position, transform.position, 0.1f);
-			carried.MovePosition(directionVector);
-			carried.rotation = Quaternion.identity;
-		}
-	}
-
 	
-
-	private void UnsetCarried() {
+	void SetCarried(Rigidbody newCarried) {
+		UnsetCarried();
+		carried = newCarried;
 		if (carried != null) {
-			carried.useGravity = true;
-			carried.collisionDetectionMode = CollisionDetectionMode.Discrete;
-			carried = null;
+			carried.transform.SetParent(null, true);
+			carried.useGravity = false;
+			carried.collisionDetectionMode = CollisionDetectionMode.Continuous;
+			//Waiting for a frame is required to ensure the click that set the carried obj to mouse doesn't unset it in the same frame
+			waitingOneFrame = true;
 		}
 	}
 
+	void FixedUpdate() {
+		//UpdateCarriedObjPos();
+	}
+
+	private void UpdateCarriedObjPos() {
+		if (carried) {
+			carried.MovePosition(transform.position);
+			var wheelVal = inputSource.GetValue().GetAxis("Mouse ScrollWheel", false);
+			if (wheelVal != 0) {
+				var rotationDelta = Quaternion.Euler(new Vector3(0, wheelVal * 180, 0));
+				carried.MoveRotation(carried.rotation * rotationDelta);
+			}
+		}
+	}
 
 	void Update()
     {
@@ -64,7 +68,7 @@ public class Grabber : MonoBehaviour
             return;
 		}
 		var inputVal = inputSource.GetValue();
-		if (inputVal.InputEnabled) {
+		if (!inputVal.InputEnabled) {
 			return;
 		}
 
@@ -78,17 +82,16 @@ public class Grabber : MonoBehaviour
 			UnsetCarried();
 			ThrowObj(thrown);
         }
+		UpdateCarriedObjPos();
 
-    }
+	}
 
-	void SetCarried(Rigidbody newCarried) {
-		UnsetCarried();
-		carried = newCarried;
+	private void UnsetCarried() {
 		if (carried != null) {
-			carried.useGravity = false;
-			carried.collisionDetectionMode = CollisionDetectionMode.Continuous;
-			//Waiting for a frame is required to ensure the click that set the carried obj to mouse doesn't unset it in the same frame
-			waitingOneFrame = true;
+			carried.useGravity = true;
+			carried.isKinematic = false;
+			carried.collisionDetectionMode = CollisionDetectionMode.Discrete;
+			carried = null;
 		}
 	}
 

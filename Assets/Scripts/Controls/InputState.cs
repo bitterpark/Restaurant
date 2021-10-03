@@ -26,6 +26,10 @@ namespace Assets.Scripts.Controls
 			return GetAxisValue("Mouse Y", raw);
 		}
 
+		float IInputSource.GetAxis(string axis, bool raw) {
+			return GetAxisValue(axis, raw);
+		}
+
 		private float GetAxisValue(string axisName, bool getRaw) {
 			float axis = 0;
 			if (InputEnabled) {
@@ -41,12 +45,17 @@ namespace Assets.Scripts.Controls
 				return false;
 			}
 		}
+
+		
 	}
 
 	public interface IInputSource
 	{
 		bool InputEnabled { get; }
-		
+
+		float GetAxis(string axis, bool raw);
+
+
 		float GetHorizontalAxis(bool raw);
 		float GetVerticalAxis(bool raw);
 
