@@ -48,7 +48,9 @@ MonoBehaviour:
     plainObj:
       id: 0
     uObj: {fileID: 11400000, guid: 4466dfb35d7409f449b825d284a35073, type: 2}
+  maxPickupDist: 1
   handsState: {fileID: 11400000, guid: 2498639db210ab1499060ad8bcaf7b83, type: 2}
+  invState: {fileID: 11400000, guid: 6f5b7b073b6271a4bb58e5994d7583fe, type: 2}
   references:
     version: 1
     00000000:

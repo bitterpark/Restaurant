@@ -1,4 +1,5 @@
 using Assets.Scripts.Controls;
+using Assets.Scripts.Inventory;
 using Assets.Scripts.Utility;
 using Assets.Scripts.ViewComps;
 using System.Collections;
@@ -26,16 +27,31 @@ namespace Assets.Scripts.Controls
 
 		[SerializeField]
 		HandsState handsState;
+		[SerializeField]
+		InventoryState invState;
 
 		bool waitingOneFrame = false;
 
 		private void OnEnable() {
 			PickUpableComp.EPickUpableClicked += OnPickUpableClicked;
+			invState.EInventoryToggled += OnInventoryToggled;
 		}
 		private void OnDisable() {
 			PickUpableComp.EPickUpableClicked -= OnPickUpableClicked;
+			invState.EInventoryToggled -= OnInventoryToggled;
 		}
 
+		void OnInventoryToggled(bool on) {
+			if (on && handsState.CarryingItem) {
+				UnsetCarried();
+			} else if (!on && invState.MouseHasItem) {
+				var mouseItem = invState.CurrentMouseItem;
+				var gameObj = mouseItem.GetItem().GetGameObject();
+				gameObj.SetActive(true);
+				ThrowObj(gameObj.GetComponent<Rigidbody>());
+				mouseItem.SetItem(null);
+			}
+		}
 
 		void OnPickUpableClicked(Rigidbody pickUpable) {
 			if (!handsState.CarryingItem && (transform.position - pickUpable.position).magnitude < maxPickupDist) {

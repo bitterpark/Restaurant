@@ -10,7 +10,7 @@ namespace Assets.Scripts.Inventory
 		MouseDraggedInventoryItem draggedInvItem;
 
 		public bool MouseHasItem => draggedInvItem?.GetItem() != null;
-		public IInventoryItem CurrentMouseItem => draggedInvItem?.GetItem();
+		public MouseDraggedInventoryItem CurrentMouseItem => draggedInvItem;
 
 		public bool IsOpen {
 			get { return isOpen; }
