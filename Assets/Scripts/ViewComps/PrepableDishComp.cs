@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Views;
+using Assets.Scripts.Wrappers;
 using System.Collections;
 using UnityEngine;
 namespace Assets.Scripts.ViewComps
@@ -7,14 +8,14 @@ namespace Assets.Scripts.ViewComps
 	public class PrepableDishComp : MonoBehaviour, Views.PrepStation.IPrepable
 	{
 		[SerializeField]
-		Dish dish;
+		IHasItemDataWrapper dishSource;
 
 		MeshFilter PrepStation.IPrepable.GetMesh() {
 			return GetComponent<MeshFilter>();
 		}
 
 		string PrepStation.IPrepable.GetName() {
-			return dish.GetName();
+			return dishSource?.GetValue()?.GetItemData()?.GetName();
 		}
 	}
 }

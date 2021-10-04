@@ -10,36 +10,42 @@ namespace Assets.Scripts.Views
 		public static event Action<OrderFulfilledStruct> EOrderFulfilled;
 
 		[SerializeField]
-		Dish orderedDish;
+		ItemData orderedDish;
 		[SerializeField]
-		DishView dishView;
-	
+		TextMeshPro textMesh;
+
 		private void OnEnable() {
-			SetDish(orderedDish);
+			SetOrder(orderedDish);
 		}
 		private void OnTriggerEnter(Collider other) {
-			var broughtBy = other.GetComponent<IHasDish>();
-			var dish = broughtBy?.GetDish();
-			if (dish != null && dish == orderedDish) {
-				SetDish(null);
+			var broughtBy = other.GetComponent<IHasItemData>();
+			var item = broughtBy?.GetItemData();
+			if (item != null && item == orderedDish) {
+				SetOrder(null);
 				EOrderFulfilled?.Invoke(new OrderFulfilledStruct() {Order = this, FulfilledBy = broughtBy });
 			} 
 		}
 
-		public void SetDish(Dish newDish) {
+		public void SetOrder(ItemData newDish) {
 			orderedDish = newDish;
-			dishView.SetDish(newDish);
+			if (newDish != null) {
+				orderedDish = newDish;
+				textMesh.text = newDish.displayName;
+				textMesh.gameObject.SetActive(true);
+			} else {
+				textMesh.gameObject.SetActive(false);
+			}
 		}
 	}
 
 	public struct OrderFulfilledStruct
 	{
 		public OrderView Order;
-		public IHasDish FulfilledBy;
+		public IHasItemData FulfilledBy;
 	}
 
-	public interface IHasDish
+	public interface IHasItemData
 	{
-		Dish GetDish();
+		ItemData GetItemData();
 	}
 }

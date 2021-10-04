@@ -21,7 +21,7 @@ namespace Assets.Scripts.Views
 		TextMeshProUGUI ingredientsText;
 
 		[SerializeField]
-		List<Dish> ingredientsRequired = new List<Dish>();
+		List<ItemData> ingredientsRequired = new List<ItemData>();
 
 		[SerializeField]
 		WrapperISpawner spawner;
@@ -29,22 +29,22 @@ namespace Assets.Scripts.Views
 		class WrapperISpawner : Wrapper<ISpawner> {
 		}
 
-		List<Dish> ingredientsMissing = new List<Dish>();
+		List<ItemData> ingredientsMissing = new List<ItemData>();
 
 		private void Awake() {
 			SetupForNextDish();
 		}
 
 		private void OnTriggerEnter(Collider other) {
-			var broughtBy = other.GetComponent<IHasDish>();
-			var dish = broughtBy?.GetDish();
+			var broughtBy = other.GetComponent<IHasItemData>();
+			var dish = broughtBy?.GetItemData();
 			if (dish != null && ingredientsMissing.Contains(dish)) {
 				IngredientBrought(dish);
 				Destroy(other.gameObject);
 			}
 		}
 
-		private void IngredientBrought(Dish dish) {
+		private void IngredientBrought(ItemData dish) {
 			ingredientsMissing.Remove(dish);
 			UpdateText();
 			if (ingredientsMissing.Count == 0) {

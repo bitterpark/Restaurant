@@ -1,5 +1,24 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!95 &2883216862642209600
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31735032095226762}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e398a02782afd734ea447a9b0ed56957, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &3926365582812106810
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7,6 +26,12 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3479619764215940289, guid: 05b2c4822542e5f45b9016270f82ce4a,
+        type: 3}
+      propertyPath: cookedDish
+      value: 
+      objectReference: {fileID: 11400000, guid: 1f23e0c03fba92b4c897eec6ce12d778,
+        type: 2}
     - target: {fileID: 3892345026997617722, guid: 05b2c4822542e5f45b9016270f82ce4a,
         type: 3}
       propertyPath: m_RootOrder
@@ -65,22 +90,39 @@ PrefabInstance:
     - target: {fileID: 3892345026997617722, guid: 05b2c4822542e5f45b9016270f82ce4a,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3892345026997617722, guid: 05b2c4822542e5f45b9016270f82ce4a,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3892345026997617722, guid: 05b2c4822542e5f45b9016270f82ce4a,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.1
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3895048967576972208, guid: 05b2c4822542e5f45b9016270f82ce4a,
         type: 3}
       propertyPath: m_Name
       value: Smoothie
       objectReference: {fileID: 0}
+    - target: {fileID: 5284966686837878530, guid: 05b2c4822542e5f45b9016270f82ce4a,
+        type: 3}
+      propertyPath: itemDataSource.uObj
+      value: 
+      objectReference: {fileID: 11400000, guid: 1f23e0c03fba92b4c897eec6ce12d778,
+        type: 2}
+    - target: {fileID: 8329291187662180228, guid: 05b2c4822542e5f45b9016270f82ce4a,
+        type: 3}
+      propertyPath: dish
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05b2c4822542e5f45b9016270f82ce4a, type: 3}
+--- !u!1 &31735032095226762 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3895048967576972208, guid: 05b2c4822542e5f45b9016270f82ce4a,
+    type: 3}
+  m_PrefabInstance: {fileID: 3926365582812106810}
+  m_PrefabAsset: {fileID: 0}

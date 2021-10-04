@@ -4,6 +4,8 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 using Assets.Scripts.Utility;
+using Assets.Scripts.Wrappers;
+using Assets.Scripts.Views;
 
 namespace Assets.Scripts.Inventory
 {
@@ -48,7 +50,7 @@ namespace Assets.Scripts.Inventory
 		}
 	}
 
-	public interface IInventoryItem
+	public interface IInventoryItem: IHasItemData
 	{
 		string GetName();
 		Sprite GetSprite();

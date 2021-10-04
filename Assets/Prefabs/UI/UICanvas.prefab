@@ -183,11 +183,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7156555959654042728}
     m_Modifications:
-    - target: {fileID: 8832301588868191157, guid: 769aa23eb14b72c44942c107caef06ea,
-        type: 3}
-      propertyPath: grabber
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 8832301589035109266, guid: 769aa23eb14b72c44942c107caef06ea,
         type: 3}
       propertyPath: m_Name
@@ -547,6 +542,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MovementHints
+      objectReference: {fileID: 0}
+    - target: {fileID: 3068441652641231495, guid: 511fd97bdd92a5a41870ca98e6a30d67,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 511fd97bdd92a5a41870ca98e6a30d67, type: 3}

@@ -10,7 +10,7 @@ namespace Assets.Scripts.Spawners
 		[SerializeField]
 		OrderView orderView;
 		[SerializeField]
-		List<Dish> orderableDishes;
+		List<ItemData> orderableDishes;
 
 		[SerializeField]
 		float timeToSpawnOrder = 1f;
@@ -40,7 +40,7 @@ namespace Assets.Scripts.Spawners
 				throw new System.Exception($"{nameof(orderableDishes)} cannot be empty, add at least one dish!");
 			}
 			var randomOrder = orderableDishes[randomIndex];
-			orderView.SetDish(randomOrder);
+			orderView.SetOrder(randomOrder);
 		}
 
 	}

@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Inventory;
 using Assets.Scripts.Utility;
+using Assets.Scripts.Wrappers;
 using System.Collections;
 using UnityEngine;
 
@@ -22,7 +23,4 @@ namespace Assets.Scripts.Inventory
 			return currentItem.GetValue();
 		}
 	}
-
-	[System.Serializable]
-	public class IInventoryItemWrapper : Wrapper<IInventoryItem> { }
 }

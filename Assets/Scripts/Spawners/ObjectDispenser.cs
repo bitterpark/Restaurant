@@ -52,7 +52,7 @@ namespace Assets.Scripts.Spawners
 			}
 			var pos = transform.position;
 			var bounds = GetBounds();
-			pos.y += bounds.y / 2;
+			//pos.y += bounds.y / 2;
 			int collidersCount = Physics.OverlapBoxNonAlloc(pos,
 				bounds / 2, 
 				overlapCheckBuffer,
@@ -70,10 +70,9 @@ namespace Assets.Scripts.Spawners
 			if (dispensedObjectPrefab == null) {
 				return;
 			} else {
-				var pos = transform.position;
 				var boundsSize = GetBounds();
-				pos.y += boundsSize.y / 2;
-				Gizmos.DrawWireCube(pos, boundsSize);
+				Gizmos.matrix = transform.localToWorldMatrix;
+				Gizmos.DrawWireCube(Vector3.zero, boundsSize);
 			}
 		}
 

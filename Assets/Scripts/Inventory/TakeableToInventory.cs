@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.Wrappers;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using static Assets.Scripts.Inventory.MouseDraggedInventoryItem;
@@ -11,7 +12,7 @@ namespace Assets.Scripts.Inventory
 		MouseDraggedInventoryItem mouseItem;
 
 		[SerializeField]
-		IInventoryItemWrapper myData;
+		IInventoryItemWrapper itemSource;
 
 		private void Awake() {
 			InventoryOpener.EInventoryToggled += OnInventoryToggled;
@@ -30,7 +31,7 @@ namespace Assets.Scripts.Inventory
 			Debug.Log("TakeableToInv clicked");
 			var mouseItemVal = mouseItem.GetItem();
 			if (enabled && mouseItemVal == null) {
-				var myValue = myData.GetValue();
+				var myValue = itemSource.GetValue();
 				myValue.GetGameObject().SetActive(false);
 				mouseItem.SetItem(myValue);
 			}

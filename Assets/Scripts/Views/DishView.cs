@@ -1,36 +1,47 @@
 ﻿using Assets.Scripts.Inventory;
 using Assets.Scripts.Utility;
+using Assets.Scripts.Wrappers;
 using System.Collections;
 using TMPro;
 using UnityEngine;
 
 namespace Assets.Scripts.Views
 {
-	public class DishView : MonoBehaviour
+	public class DishView : MonoBehaviour, IHasItemData
 	{
 		[SerializeField]
-		Dish viewedDish;
+		IHasItemDataWrapper itemSource;
 		[SerializeField]
 		TextMeshPro textMesh;
 
-		private void OnEnable() {
-			SetDish(viewedDish);
+		void OnEnable() {
+			SetDish(itemSource.GetValue().GetItemData());
+			OrderView.EOrderFulfilled += OnOrderFulfilled;
+		}
+		private void OnDisable() {
+			OrderView.EOrderFulfilled -= OnOrderFulfilled;
 		}
 
-		public void SetDish(Dish newDish) {
-			if (newDish != null) {
-				viewedDish = newDish;
-				textMesh.text = viewedDish.displayName;
-				textMesh.gameObject.SetActive(true);
-			} else {
-				textMesh.gameObject.SetActive(false);
+		void SetDish(ItemData newDish) {
+			if (textMesh != null) {
+				if (newDish != null) {
+					textMesh.text = newDish.displayName;
+					textMesh.gameObject.SetActive(true);
+				} else {
+					textMesh.gameObject.SetActive(false);
+				}
 			}
 		}
+
+
+		void OnOrderFulfilled(OrderFulfilledStruct args) {
+			if (args.FulfilledBy == itemSource.GetValue()) {
+				Destroy(gameObject);
+			}
+		}
+
+		ItemData IHasItemData.GetItemData() {
+			return itemSource.GetValue().GetItemData();
+		}
 	}
-}
-[System.Serializable]
-public class Wropper
-{
-
-
 }
