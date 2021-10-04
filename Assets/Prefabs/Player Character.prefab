@@ -25,11 +25,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5839852187507832579}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.7, z: 1.2}
+  m_LocalPosition: {x: 0, y: 0, z: 1.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 8704112010993161101}
-  m_RootOrder: 1
+  m_Father: {fileID: 7383962524413085591}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &432731447827066723
 MonoBehaviour:
@@ -51,6 +51,7 @@ MonoBehaviour:
   maxPickupDist: 1
   handsState: {fileID: 11400000, guid: 2498639db210ab1499060ad8bcaf7b83, type: 2}
   invState: {fileID: 11400000, guid: 6f5b7b073b6271a4bb58e5994d7583fe, type: 2}
+  mouseDraggedItem: {fileID: 11400000, guid: 1f54969515739a14e88331c557adc8e5, type: 2}
   references:
     version: 1
     00000000:
@@ -88,7 +89,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7383962524413085591}
-  - {fileID: 6795358627427328495}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -230,7 +230,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 6795358627427328495}
   m_Father: {fileID: 8704112010993161101}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

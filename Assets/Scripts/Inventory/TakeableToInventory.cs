@@ -28,9 +28,8 @@ namespace Assets.Scripts.Inventory
 		}
 
 		private void OnMouseDown() {
-			Debug.Log("TakeableToInv clicked");
 			var mouseItemVal = mouseItem.GetItem();
-			if (enabled && mouseItemVal == null) {
+			if (enabled && mouseItemVal == null && mouseItem.PosWithinReach(transform.position)) {
 				var myValue = itemSource.GetValue();
 				myValue.GetGameObject().SetActive(false);
 				mouseItem.SetItem(myValue);

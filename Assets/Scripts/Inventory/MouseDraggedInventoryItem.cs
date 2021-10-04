@@ -12,7 +12,22 @@ namespace Assets.Scripts.Inventory
 		
 		public event System.Action EItemChanged;
 
-		IInventoryItemWrapper currentItem;
+		[SerializeField]
+		float maxGrabDistance = 1f;
+
+		IInventoryItemWrapper currentItem = new IInventoryItemWrapper();
+		Transform playerTransform;
+
+		public void SetPlayerTransform(Transform player) {
+			playerTransform = player;
+		}
+
+		public bool PosWithinReach(Vector3 pos) {
+			if (playerTransform == null) {
+				return false;
+			}
+			return (playerTransform.position - pos).magnitude < maxGrabDistance;
+		}
 
 		public void SetItem(IInventoryItem item) {
 			currentItem.SetValue(item);

@@ -27,7 +27,7 @@ namespace Assets.Scripts.Inventory
 
 		IInventoryItem myItem;
 
-		void OnEnable() {
+		void Awake() {
 			SetItem(startingData.GetValue());
 		}
 

@@ -543,11 +543,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MovementHints
       objectReference: {fileID: 0}
-    - target: {fileID: 3068441652641231495, guid: 511fd97bdd92a5a41870ca98e6a30d67,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 511fd97bdd92a5a41870ca98e6a30d67, type: 3}
 --- !u!224 &7156555958435655724 stripped

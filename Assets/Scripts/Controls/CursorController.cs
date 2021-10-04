@@ -17,8 +17,10 @@ namespace Assets.Scripts.Controls
 		private void Update() {
 			if (inputSource.GetValue().InputEnabled) {
 				Cursor.lockState = CursorLockMode.Locked;
+				Cursor.visible = false;
 			} else {
 				Cursor.lockState = CursorLockMode.Confined;
+				Cursor.visible = true;
 			}
 		}
 

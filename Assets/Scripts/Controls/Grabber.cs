@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Assets.Scripts.Controls
 {
-	public class Grabber : MonoBehaviour
+	public class Grabber : MonoBehaviour, IThrower
 	{
 		[SerializeField]
 		float throwForce = 3f;
@@ -29,16 +29,22 @@ namespace Assets.Scripts.Controls
 		HandsState handsState;
 		[SerializeField]
 		InventoryState invState;
+		[SerializeField]
+		MouseDraggedInventoryItem mouseDraggedItem;
 
 		bool waitingOneFrame = false;
 
 		private void OnEnable() {
 			PickUpableComp.EPickUpableClicked += OnPickUpableClicked;
 			invState.EInventoryToggled += OnInventoryToggled;
+			handsState.Thrower = this;
+			mouseDraggedItem.SetPlayerTransform(transform);
 		}
 		private void OnDisable() {
 			PickUpableComp.EPickUpableClicked -= OnPickUpableClicked;
 			invState.EInventoryToggled -= OnInventoryToggled;
+			handsState.Thrower = null;
+			mouseDraggedItem.SetPlayerTransform(null);
 		}
 
 		void OnInventoryToggled(bool on) {
@@ -76,17 +82,7 @@ namespace Assets.Scripts.Controls
 			}
 		}
 
-		private void UpdateCarriedObjPos() {
-			if (handsState.CarryingItem) {
-				var carried = handsState.GetItem();
-				carried.MovePosition(transform.position);
-				var wheelVal = inputSource.GetValue().GetAxis("Mouse ScrollWheel", false);
-				if (wheelVal != 0) {
-					var rotationDelta = Quaternion.Euler(new Vector3(0, wheelVal * 180, 0));
-					carried.MoveRotation(carried.rotation * rotationDelta);
-				}
-			}
-		}
+		
 
 		void Update() {
 			if (waitingOneFrame) {
@@ -111,7 +107,18 @@ namespace Assets.Scripts.Controls
 				ThrowObj(thrown);
 			}
 			UpdateCarriedObjPos();
+		}
 
+		private void UpdateCarriedObjPos() {
+			if (handsState.CarryingItem) {
+				var carried = handsState.GetItem();
+				carried.MovePosition(transform.position);
+				var wheelVal = inputSource.GetValue().GetAxis("Mouse ScrollWheel", false);
+				if (wheelVal != 0) {
+					var rotationDelta = Quaternion.Euler(new Vector3(0, wheelVal * 180, 0));
+					carried.MoveRotation(carried.rotation * rotationDelta);
+				}
+			}
 		}
 
 		private void UnsetCarried() {

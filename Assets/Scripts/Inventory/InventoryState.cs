@@ -23,6 +23,10 @@ namespace Assets.Scripts.Inventory
 		}
 		bool isOpen;
 
+		private void OnEnable() {
+			isOpen = false;
+		}
+
 		public event System.Action<bool> EInventoryToggled;
 	}
 }

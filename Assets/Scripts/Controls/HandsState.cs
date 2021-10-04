@@ -10,6 +10,8 @@ namespace Assets.Scripts.Controls
 
 		public bool CarryingItem => currentItem != null;
 
+		public IThrower Thrower { get; set; }
+
 		Rigidbody currentItem;
 
 		public void SetItem(Rigidbody item) {
@@ -20,5 +22,10 @@ namespace Assets.Scripts.Controls
 		public Rigidbody GetItem() {
 			return currentItem;
 		}
+	}
+
+	public interface IThrower
+	{
+		void ThrowObj(Rigidbody rigidbody);
 	}
 }

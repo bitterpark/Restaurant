@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Restaurant Interior Full Pack/2.Scene/Sample.unity
+    guid: b138bd60401514a40a3bc4e708ff4455
   m_configObjects: {}

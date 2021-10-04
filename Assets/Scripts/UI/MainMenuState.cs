@@ -17,6 +17,9 @@ namespace Assets.Scripts.UI
 		}
 		bool menuOpen;
 
+		private void OnEnable() {
+			menuOpen = false;
+		}
 
 		public event System.Action<bool> EMenuToggled;
 	}

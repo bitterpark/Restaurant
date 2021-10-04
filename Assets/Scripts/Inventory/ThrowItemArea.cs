@@ -13,7 +13,7 @@ namespace Assets.Scripts.Inventory
 		MouseDraggedInventoryItem mouseItem;
 
 		[SerializeField]
-		Grabber grabber;
+		HandsState handsState;
 
 		void Awake() {
 			mouseItem.EItemChanged += OnMouseItemChanged;
@@ -53,7 +53,7 @@ namespace Assets.Scripts.Inventory
 		void ThrowItem(GameObject itemView) {
 			itemView.gameObject.SetActive(true);
 			var rb = itemView.GetComponent<Rigidbody>();
-			grabber.ThrowObj(rb);
+			handsState?.Thrower?.ThrowObj(rb);
 		}
 	}
 }
